@@ -1,0 +1,81 @@
+### Login admin
+POST {{host}}/api/auth/login/admin
+Content-Type: application/json
+
+{
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}"
+}
+
+> {%
+    client.test('Login admin', function() {
+        client.assert(response.status === 200, "Login user failed");
+        client.global.set('accessToken', response.body.data.accessToken)
+    });
+%}
+
+### Create invite group
+POST {{host}}/api/inviteGroups
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "groupName": "Яхимчики 3",
+  "guests": [],
+  "invitation": {
+    "inviteTitle": "Дорогие",
+    "checkSlip": false,
+    "checkTransport": true
+  }
+}
+
+> {%
+  client.test('Create invite group', function() {
+    client.assert(response.status === 200, "Create invite group OK");
+    client.global.set("inviteGroupsId", response.body.data.id)
+  });
+%}
+
+### Edit invite group
+PUT {{host}}/api/inviteGroups
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "id": "65caa28dfba056e3038a1c48",
+  "updateGuests": {
+    "65c8ec6ac789d85fd5f611b8": true
+  }
+}
+
+> {%
+    client.test('Create invite group', function() {
+        client.assert(response.status === 200, "Create guest OK");
+    });
+%}
+
+### Remove guest
+DELETE {{host}}/api/guest/{{removeGuestId}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+> {%
+    client.test('Create guest', function() {
+        client.assert(response.status === 200, "Remove guest OK");
+    });
+%}
+
+### Get invite groups
+GET {{host}}/api/inviteGroups
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+> {%
+    client.test('get invite groups', function() {
+        client.assert(response.status === 200, "Remove guest OK");
+    });
+%}
+
+
+
+

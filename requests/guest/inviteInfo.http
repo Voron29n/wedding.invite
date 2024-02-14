@@ -1,0 +1,29 @@
+### Login admin
+POST {{host}}/api/auth/login/guest
+Content-Type: application/json
+
+{
+  "inviteId": "623c9ae0-183a-479f-b36d-b675d85b28dc"
+}
+
+> {%
+    client.test('Login admin', function() {
+        client.assert(response.status === 200, "Login user failed");
+        client.global.set('accessToken', response.body.data.accessToken)
+    });
+%}
+
+### Get invite info
+GET {{host}}/api/inviteInfo
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+> {%
+    client.test('get invite groups', function() {
+        client.assert(response.status === 200, "Remove guest OK");
+    });
+%}
+
+
+
+

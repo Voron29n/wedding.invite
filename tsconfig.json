@@ -1,0 +1,58 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "commonjs",
+    "sourceMap": true,
+    "lib": [
+      "es6",
+      "es2017"
+    ],
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@src/*": [
+        "./*"
+      ],
+      "@const": [
+        "const/index"
+      ],
+      "@controller": [
+        "controller/index"
+      ],
+      "@configuration": [
+        "configuration/index"
+      ],
+      "@entities": [
+        "entities/index"
+      ],
+      "@errors": [
+        "errors/index"
+      ],
+      "@middleware": [
+        "middleware/index"
+      ],
+      "@migration": [
+        "migration/index"
+      ],
+      "@service": [
+        "service/index"
+      ],
+      "@types": [
+        "types/index"
+      ],
+      "@validation": [
+        "validation/index"
+      ],
+      "@repository": [
+        "repository/index"
+      ]
+    }
+  }
+}

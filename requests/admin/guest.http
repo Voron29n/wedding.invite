@@ -1,0 +1,84 @@
+### Login admin
+POST {{host}}/api/auth/login/admin
+Content-Type: application/json
+
+{
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}"
+}
+
+> {%
+    client.test('Login admin', function() {
+        client.assert(response.status === 200, "Login user failed");
+        client.global.set('accessToken', response.body.data.accessToken)
+    });
+%}
+
+### Create guest
+POST {{host}}/api/guests
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "firstName": "{{firstName}} 123",
+  "lastName": "{{lastName}}",
+  "side": "{{side}}",
+  "isAdult": true
+}
+
+> {%
+  client.test('Create guest', function() {
+    client.assert(response.status === 200, "Create guest OK");
+    client.global.set("guestIdToRemove", response.body.data.id)
+  });
+%}
+
+### Edit guest
+PUT {{host}}/api/guests
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+{
+  "id": "65c4f617c17a841a58c9ea47",
+  "side": "{{husbandSide}}"
+}
+
+> {%
+    client.test('Create guest', function() {
+        client.assert(response.status === 200, "Create guest OK");
+    });
+%}
+
+### Remove guest
+DELETE {{host}}/api/guests/{{removeGuestId}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+> {%
+    client.test('Create guest', function() {
+        client.assert(response.status === 200, "Remove guest OK");
+    });
+%}
+
+### Get guest
+GET {{host}}/api/guests/65c4f617c17a841a58c9ea47
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+> {%
+    client.test('Get guest by id', function() {
+        client.assert(response.status === 200, "Get guest OK");
+    });
+%}
+
+### Get guest
+GET {{host}}/api/guests
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+> {%
+  client.test('Get all guests', function() {
+    client.assert(response.status === 200, "Remove guest OK");
+  });
+%}
+

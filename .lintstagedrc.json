@@ -1,0 +1,5 @@
+{
+  "*.ts": [
+    "prettier --log-level warn --write"
+  ]
+}

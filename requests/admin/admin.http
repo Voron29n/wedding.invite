@@ -1,0 +1,31 @@
+### Login admin
+POST {{host}}/api/auth/login/admin
+Content-Type: application/json
+
+{
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}"
+}
+
+> {%
+    client.test('Login user', function() {
+        client.assert(response.status === 200, "Login user OK");
+        client.global.set('accessToken', response.body.data.accessToken)
+    });
+%}
+
+### Create admin
+POST {{host}}/api/admin/register
+Content-Type: application/json
+#Authorization: Bearer {{accessToken}}
+
+{
+  "email": "{{adminEmail}}",
+  "password": "{{adminPassword}}"
+}
+
+> {%
+  client.test('Create user', function() {
+    client.assert(response.status === 200, "Create user OK");
+  });
+%}

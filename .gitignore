@@ -1,0 +1,8 @@
+#Idea folder
+.idea
+#Build folder
+dist
+#Node modules
+node_modules
+#env file
+.env

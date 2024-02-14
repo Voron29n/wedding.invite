@@ -1,0 +1,27 @@
+{
+  "printWidth": 80,
+  "semi": true,
+  "singleQuote": true,
+  "tsxSingleQuote": true,
+  "jsxSingleQuote": true,
+  "trailingComma": "none",
+  "jsxBracketSameLine": false,
+  "bracketSpacing": true,
+  "arrowParens": "avoid",
+  "requirePragma": false,
+  "proseWrap": "preserve",
+  "importOrder": [
+    "^(express)(.*)",
+    "^(@micro-orm/)(.*)",
+    "<THIRD_PARTY_MODULES>",
+    "./index(.*)",
+    "../middleware(.*)",
+    "../types(.*)",
+    "../configuration(.*)",
+    "../repository(.*)",
+    "../services(.*)",
+    "../validation(.*)",
+    "^[../]"
+  ],
+  "importOrderSeparation": false
+}
