@@ -1,3 +1,5 @@
+import { Role } from '@src/types/user.type';
+
 export interface ErrorResponse {
   message: string;
   statusCode: number;
@@ -12,9 +14,9 @@ export interface RemoveResponseData {
 export interface LoginTokenData {
   accessToken: string;
   expirationTime: string;
-  user: {
-    name: string;
-  };
+  name: string;
+  role: Role;
+  id: string;
 }
 
 export interface HealthCheckData {
