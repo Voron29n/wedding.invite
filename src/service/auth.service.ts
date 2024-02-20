@@ -26,7 +26,12 @@ export const loginAdmin = async ({
     throw new BadRequestError(ERROR_MESSAGES.INVALID_CREDENTIALS);
   }
 
-  return createAuthResponse(admin);
+  return {
+    ...createAuthResponse(admin),
+    user: {
+      name: admin.email
+    }
+  };
 };
 
 export const loginGuest = async ({
@@ -38,7 +43,12 @@ export const loginGuest = async ({
     throw new BadRequestError(ERROR_MESSAGES.INVALID_CREDENTIALS);
   }
 
-  return createAuthResponse(guest);
+  return {
+    ...createAuthResponse(guest),
+    user: {
+      name: guest.firstName
+    }
+  };
 };
 
 export const getAdminByToken = async (id: string): Promise<AdminEntity> => {

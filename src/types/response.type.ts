@@ -12,6 +12,9 @@ export interface RemoveResponseData {
 export interface LoginTokenData {
   accessToken: string;
   expirationTime: string;
+  user: {
+    name: string;
+  };
 }
 
 export interface HealthCheckData {
