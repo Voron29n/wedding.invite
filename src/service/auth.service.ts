@@ -28,9 +28,9 @@ export const loginAdmin = async ({
 
   return {
     ...createAuthResponse(admin),
-    user: {
-      name: admin.email
-    }
+    name: admin.email,
+    role: admin.role,
+    id: admin.id
   };
 };
 
@@ -45,9 +45,9 @@ export const loginGuest = async ({
 
   return {
     ...createAuthResponse(guest),
-    user: {
-      name: guest.firstName
-    }
+    name: guest.firstName,
+    role: guest.role,
+    id: guest.id
   };
 };
 
