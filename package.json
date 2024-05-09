@@ -5,7 +5,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -r tsconfig-paths/register ./src/index.ts --ignore 'requests/*' \"",
-    "prod": "node -r tsconfig-paths/register dist/index.js",
+    "prod": "npx tsc && ts-node -r tsconfig-paths/register ./dist/index.js",
     "migrateUp": "npx tsc && npx mikro-orm migration:up",
     "migrateDown": "npx tsc && npx mikro-orm migration:down",
     "prepare": "husky install"
