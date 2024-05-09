@@ -67,6 +67,5 @@ export const getGuestByToken = async (id: string): Promise<GuestEntity> => {
   if (!guest) {
     throw new NotAuthorisedError(ERROR_MESSAGES.NOT_AUTHORIZED);
   }
-
   return guest;
 };
