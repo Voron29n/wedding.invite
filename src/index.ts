@@ -1,4 +1,5 @@
 import { Socket } from 'net';
+import 'module-alias/register';
 
 import { EntityManager, EntityRepository, MikroORM } from '@mikro-orm/mongodb';
 import dotenv from 'dotenv';
@@ -18,6 +19,7 @@ import {
 } from '@configuration';
 import { healthCheckRouter } from './healthCheck';
 import { inviteInfo } from '@src/controller/guest';
+import * as console from 'node:console';
 
 dotenv.config();
 
