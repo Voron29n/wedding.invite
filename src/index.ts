@@ -1,4 +1,5 @@
 import { Socket } from 'net';
+import 'module-alias/register';
 
 import { EntityManager, EntityRepository, MikroORM } from '@mikro-orm/mongodb';
 import dotenv from 'dotenv';
@@ -18,11 +19,12 @@ import {
 } from '@configuration';
 import { healthCheckRouter } from './healthCheck';
 import { inviteInfo } from '@src/controller/guest';
+import * as console from 'node:console';
 
 dotenv.config();
 
 const app: Express = express();
-const appPort = parseInt(process.env.APPLICATION_PORT!, 10);
+const appPort = parseInt(process.env.PORT!, 10);
 export const DI = {} as {
   orm: MikroORM;
   em: EntityManager;

@@ -5,7 +5,7 @@
   "scripts": {
     "precommit": "lint-staged",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -r tsconfig-paths/register ./src/index.ts --ignore 'requests/*' \"",
-    "prod": "npx tsc && ts-node -r tsconfig-paths/register ./dist/index.js",
+    "prod": "npx tsc && node -r tsconfig-paths/register dist/index.js",
     "migrateUp": "npx tsc && npx mikro-orm migration:up",
     "migrateDown": "npx tsc && npx mikro-orm migration:down"
   },
@@ -28,7 +28,12 @@
     "husky": "^8.0.0",
     "lint-staged": "^15.1.0",
     "nodemon": "^3.0.1",
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.0.2",
+    "typescript-transform-paths": "^3.4.7"
   },
   "dependencies": {
     "@mikro-orm/cli": "^5.9.0",
@@ -42,11 +47,22 @@
     "joi": "^17.11.0",
     "joi-extract-type": "^15.0.8",
     "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
     "uuid": "^9.0.1",
-    "winston": "^3.11.0",
-    "typescript": "^5.0.2",
-    "ts-node": "^10.9.1",
-    "tsconfig-paths": "^4.2.0",
-    "tslib": "^2.6.2"
+    "winston": "^3.11.0"
+  },
+  "_moduleAliases": {
+    "@src": "dist",
+    "@const": "dist/const",
+    "@controller": "dist/controller",
+    "@configuration": "dist/configuration",
+    "@entities": "dist/entities",
+    "@errors": "dist/errors",
+    "@middleware": "dist/middleware",
+    "@migration": "dist/migration",
+    "@service": "dist/service",
+    "@types": "dist/types",
+    "@validation": "dist/validation",
+    "@repository": "dist/repository"
   }
 }
