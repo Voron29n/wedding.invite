@@ -41,9 +41,14 @@ Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
 {
-  "id": "65caa28dfba056e3038a1c48",
+  "id": "6648b6c677b88d6cd878124c",
+  "groupName": "tests",
   "updateGuests": {
-    "65c8ec6ac789d85fd5f611b8": true
+    "663ff8a2a947f5482f8b1c02": false
+  },
+  "invitation": {
+    "checkSlip": true,
+    "checkTransport": false
   }
 }
 
@@ -54,13 +59,13 @@ Authorization: Bearer {{accessToken}}
 %}
 
 ### Remove invite groups
-DELETE {{host}}/api/data/inviteGroups/{{removeGuestId}}
+DELETE {{host}}/api/data/inviteGroups/6648b6c677b88d6cd878124c
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
 > {%
-    client.test('Create guest', function() {
-        client.assert(response.status === 200, "Remove guest OK");
+    client.test('Remove invite group', function() {
+        client.assert(response.status === 200, "Remove invite group OK");
     });
 %}
 
@@ -75,6 +80,17 @@ Authorization: Bearer {{accessToken}}
     });
 %}
 
+
+### Get invite group by id
+GET {{host}}/api/data/inviteGroups/6648b0b40892093293718ba5
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+> {%
+  client.test('get invite groups', function() {
+    client.assert(response.status === 200, "Remove guest OK");
+  });
+%}
 
 
 

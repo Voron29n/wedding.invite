@@ -50,7 +50,7 @@ export class InviteGroupEntity extends BaseEntity {
     super();
     this.groupName = groupName;
     this.invitation = invitation;
-    this.guests = new Collection<GuestEntity, object>(guests);
+    guests.forEach(guest => this.guests.add(guest));
     this.createdBy = createdBy;
   }
 

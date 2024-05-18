@@ -39,13 +39,10 @@ export const getInviteGroupByGroupName = async (
     DI.inviteGroupRepository.findOne({ groupName })
   );
 
-export const removeInviteGroupById = async (id: string): Promise<void> =>
-  executeDbLogError<void>(() => DI.em.remove({ _id: new ObjectId(id) }));
-
 export const saveInviteGroupToDB = async (
   inviteGroup: InviteGroupEntity
 ): Promise<void> =>
-  executeDbLogError<void>(() => DI.em.persist(inviteGroup).flush());
+  executeDbLogError<void>(() => DI.em.persistAndFlush(inviteGroup));
 
 export const removeInviteGroupFromDB = async (
   inviteGroup: InviteGroupEntity

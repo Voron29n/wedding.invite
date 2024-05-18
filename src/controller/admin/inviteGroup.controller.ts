@@ -5,7 +5,6 @@ import {
   ValidatedRequest
 } from 'express-joi-validation';
 import { InviteGroupEntity } from '@entities';
-import { isGuest } from '@middleware';
 import {
   createInviteGroup,
   editInviteGroup,
@@ -74,7 +73,6 @@ inviteGroup.put(
 
 inviteGroup.get(
   '/:groupId',
-  isGuest,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const groupId: string = req.params?.groupId || '';
@@ -89,7 +87,6 @@ inviteGroup.get(
 
 inviteGroup.delete(
   '/:groupId',
-  isGuest,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const groupId: string = req.params?.groupId || '';

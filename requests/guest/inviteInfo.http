@@ -1,9 +1,9 @@
 ### Login admin
-POST {{host}}/api/data/api/auth/login/guest
+POST {{host}}/api/data/auth/login/guest
 Content-Type: application/json
 
 {
-  "inviteId": "623c9ae0-183a-479f-b36d-b675d85b28dc"
+  "inviteId": "3d7fdede-135f-4164-8949-647ce08b0025"
 }
 
 > {%

@@ -151,9 +151,10 @@ const removeInviteGroupEntity = async (
   inviteGroup: InviteGroupEntity
 ): Promise<void> => {
   try {
+    const inviteGroupJson = JSON.stringify(inviteGroup);
     await removeInviteGroupFromDB(inviteGroup);
     DI.logger.debug(
-      `InviteGroup was removed from db invite_group: ${inviteGroup}`
+      `InviteGroup was removed from db invite_group: ${inviteGroupJson}`
     );
 
     return Promise.resolve();
