@@ -15,9 +15,10 @@ import {
 import {
   AuthValidatedRequest,
   CreateGuestRequestBody,
-  EditGuestRequestBody
+  EditGuestRequestBody,
+  RemoveResponseData
 } from '@types';
-import { sendEntityDataResponse } from '@src/utils';
+import { sendDataResponse, sendEntityDataResponse } from '@src/utils';
 import {
   createGuestBodySchema,
   CreateGuestRequestSchema,
@@ -66,9 +67,9 @@ guestRouter.delete(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const guestId: string = req.params?.guestId || '';
-      const guestEntity = await removeGuest(guestId);
+      const removeResponseData = await removeGuest(guestId);
 
-      sendEntityDataResponse<GuestEntity>(res, guestEntity);
+      sendDataResponse<RemoveResponseData>(res, removeResponseData);
     } catch (error) {
       next(error);
     }

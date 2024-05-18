@@ -1,6 +1,10 @@
 import { AdminEntity, GuestEntity } from '@entities';
 import { ERROR_MESSAGES } from '@const';
-import { CreateGuestRequestBody, EditGuestRequestBody } from '@types';
+import {
+  CreateGuestRequestBody,
+  EditGuestRequestBody,
+  RemoveResponseData
+} from '@types';
 import { DI } from '../index';
 import {
   getAllGuestsFromDB,
@@ -41,12 +45,14 @@ export const getAllGuests = async (
   );
 };
 
-export const removeGuest = async (uuid: string): Promise<GuestEntity> => {
+export const removeGuest = async (
+  uuid: string
+): Promise<RemoveResponseData> => {
   const guest = await getGuest(uuid);
 
   await removeGuestEntity(guest);
 
-  return guest;
+  return Promise.resolve({ success: true });
 };
 
 export const editGuest = async (
@@ -109,8 +115,9 @@ const saveGuest = async (guest: GuestEntity): Promise<void> => {
 
 const removeGuestEntity = async (guest: GuestEntity): Promise<void> => {
   try {
+    const guestJson = wrap(guest);
     await removeGuestFromDB(guest);
-    DI.logger.debug(`Guest was removed from db Guest: ${guest}`);
+    DI.logger.debug(`Guest was removed from db Guest: ${guestJson}`);
 
     return Promise.resolve();
   } catch (_error) {

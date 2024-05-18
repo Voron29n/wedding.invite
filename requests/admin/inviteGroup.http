@@ -41,10 +41,10 @@ Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
 {
-  "id": "6648b6c677b88d6cd878124c",
+  "id": "6648ba0eb86bb5e8934b357b",
   "groupName": "tests",
   "updateGuests": {
-    "663ff8a2a947f5482f8b1c02": false
+    "663ff8a2a947f5482f8b1c02": true
   },
   "invitation": {
     "checkSlip": true,
@@ -59,7 +59,7 @@ Authorization: Bearer {{accessToken}}
 %}
 
 ### Remove invite groups
-DELETE {{host}}/api/data/inviteGroups/6648b6c677b88d6cd878124c
+DELETE {{host}}/api/data/inviteGroups/6648bc84f853da853ebc1b76
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 

@@ -62,7 +62,7 @@ Authorization: Bearer {{accessToken}}
 %}
 
 ### Get guest
-GET {{host}}/api/data/guests/65c4f617c17a841a58c9ea47
+GET {{host}}/api/data/guests/663ff8a2a947f5482f8b1c02
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 

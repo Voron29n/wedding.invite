@@ -18,7 +18,7 @@ import {
   EditInviteGroupRequestBody,
   RemoveResponseData
 } from '@types';
-import { sendEntityDataResponse } from '@src/utils';
+import { sendDataResponse, sendEntityDataResponse } from '@src/utils';
 import {
   createInviteGroupBodySchema,
   CreateInviteGroupRequestSchema,
@@ -92,7 +92,7 @@ inviteGroup.delete(
       const groupId: string = req.params?.groupId || '';
       const removeResponseData = await removeInviteGroup(groupId);
 
-      sendEntityDataResponse<RemoveResponseData>(res, removeResponseData);
+      sendDataResponse<RemoveResponseData>(res, removeResponseData);
     } catch (error) {
       next(error);
     }
