@@ -20,14 +20,26 @@ const editGuestBodySchema = Joi.object({
   isAdult: Joi.boolean().optional()
 });
 
+const getGuestsBySchema = Joi.object({
+  inviteGroup: Joi.string().optional()
+});
+
 interface CreateGuestRequestSchema extends ValidatedRequestSchema {
   [ContainerTypes.Body]: JoiExtract.extractType<typeof createGuestBodySchema>;
+}
+
+interface GetGuestsByRequestSchema extends ValidatedRequestSchema {
+  [ContainerTypes.Query]: JoiExtract.extractType<typeof getGuestsBySchema>;
 }
 
 interface EditGuestRequestSchema extends ValidatedRequestSchema {
   [ContainerTypes.Body]: JoiExtract.extractType<typeof editGuestBodySchema>;
 }
 
-export { createGuestBodySchema, editGuestBodySchema };
+export { createGuestBodySchema, editGuestBodySchema, getGuestsBySchema };
 
-export type { CreateGuestRequestSchema, EditGuestRequestSchema };
+export type {
+  CreateGuestRequestSchema,
+  EditGuestRequestSchema,
+  GetGuestsByRequestSchema
+};

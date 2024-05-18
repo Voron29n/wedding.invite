@@ -2,15 +2,14 @@ import { NextFunction, Request, Response, Router } from 'express';
 import {
   createValidator,
   ExpressJoiInstance,
-  ValidatedRequest,
-  ValidatedRequestSchema
+  ValidatedRequest
 } from 'express-joi-validation';
 import { GuestEntity } from '@entities';
 import {
   createGuest,
   editGuest,
+  getAllGuests,
   getGuest,
-  getGuests,
   removeGuest
 } from '@service';
 import {
@@ -67,8 +66,7 @@ guestRouter.delete(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const guestId: string = req.params?.guestId || '';
-      const { admin } = req as AuthValidatedRequest<ValidatedRequestSchema>;
-      const guestEntity = await removeGuest(guestId, admin);
+      const guestEntity = await removeGuest(guestId);
 
       sendEntityDataResponse<GuestEntity>(res, guestEntity);
     } catch (error) {
@@ -79,9 +77,14 @@ guestRouter.delete(
 
 guestRouter.get(
   '/',
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (
+    req: ValidatedRequest<EditGuestRequestSchema>,
+    res: Response,
+    next: NextFunction
+  ) => {
     try {
-      const guestEntities = await getGuests();
+      const { inviteGroup } = req.query;
+      const guestEntities = await getAllGuests(inviteGroup);
 
       sendEntityDataResponse<GuestEntity[]>(res, guestEntities);
     } catch (error) {

@@ -72,7 +72,7 @@ Authorization: Bearer {{accessToken}}
     });
 %}
 
-### Get guest
+### Get all guests
 GET {{host}}/api/data/guests
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
@@ -83,3 +83,13 @@ Authorization: Bearer {{accessToken}}
   });
 %}
 
+### Get guests without invite group
+GET {{host}}/api/data/guests?inviteGroup=empty
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+> {%
+  client.test('Get all guests', function() {
+    client.assert(response.status === 200, "Remove guest OK");
+  });
+%}

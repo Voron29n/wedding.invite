@@ -9,7 +9,7 @@ import {
   getGuestsByIds,
   getInviteGroupByGroupName,
   getInviteGroupById,
-  removeInviteGroupById,
+  removeInviteGroupFromDB,
   saveInviteGroupToDB
 } from '@repository';
 import {
@@ -55,15 +55,11 @@ export const createInviteGroup = async (
   const newInviteGroup = new InviteGroupEntity(
     groupName,
     guestsEntity,
-    new InvitationEntity(
-      invitation.inviteTitle,
-      invitation.checkSlip,
-      invitation.checkTransport
-    ),
+    new InvitationEntity(invitation.checkSlip, invitation.checkTransport),
     createdBy
   );
 
-  await saveInviteGroup(newInviteGroup);
+  await saveInviteGroupEntity(newInviteGroup);
 
   return newInviteGroup;
 };
@@ -101,7 +97,13 @@ const updateInviteGroupGuests = async (
 export const removeInviteGroup = async (
   id: string
 ): Promise<RemoveResponseData> => {
-  await removeInviteGroupById(id);
+  const inviteGroup = await getInviteGroupById(id);
+
+  if (!inviteGroup) {
+    throw new InternalServerError(INVITE_GROUP_NOT_EXISTED);
+  }
+
+  await removeInviteGroupEntity(inviteGroup);
 
   return Promise.resolve({ success: true });
 };
@@ -127,17 +129,32 @@ export const editInviteGroup = async (
     { updateByPrimaryKey: false }
   );
 
-  await saveInviteGroup(inviteGroup);
+  await saveInviteGroupEntity(inviteGroup);
 
   return inviteGroup;
 };
 
-const saveInviteGroup = async (
+const saveInviteGroupEntity = async (
   inviteGroup: InviteGroupEntity
 ): Promise<void> => {
   try {
     await saveInviteGroupToDB(inviteGroup);
     DI.logger.debug(`InviteGroup was saved to db invite_group: ${inviteGroup}`);
+
+    return Promise.resolve();
+  } catch (_error) {
+    throw new InternalServerError(INVITE_GROUP_SAVING_ERROR);
+  }
+};
+
+const removeInviteGroupEntity = async (
+  inviteGroup: InviteGroupEntity
+): Promise<void> => {
+  try {
+    await removeInviteGroupFromDB(inviteGroup);
+    DI.logger.debug(
+      `InviteGroup was removed from db invite_group: ${inviteGroup}`
+    );
 
     return Promise.resolve();
   } catch (_error) {

@@ -23,7 +23,6 @@ Authorization: Bearer {{accessToken}}
   "groupName": "Яхимчики 3",
   "guests": [],
   "invitation": {
-    "inviteTitle": "Дорогие",
     "checkSlip": false,
     "checkTransport": true
   }
@@ -54,8 +53,8 @@ Authorization: Bearer {{accessToken}}
     });
 %}
 
-### Remove guest
-DELETE {{host}}/api/data/guest/{{removeGuestId}}
+### Remove invite groups
+DELETE {{host}}/api/data/inviteGroups/{{removeGuestId}}
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 

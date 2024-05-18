@@ -7,9 +7,6 @@ import { InviteGroupEntity } from './inviteGroup.entity';
   tableName: 'invitation'
 })
 export class InvitationEntity extends BaseEntity {
-  @Property()
-  inviteTitle: string;
-
   @Property({ default: false })
   checkSlip: boolean;
 
@@ -19,18 +16,13 @@ export class InvitationEntity extends BaseEntity {
   @OneToOne(() => InviteGroupEntity, { nullable: true })
   inviteGroup?: InviteGroupEntity;
 
-  constructor(
-    inviteTitle: string,
-    checkSlip: boolean,
-    checkTransport: boolean
-  ) {
+  constructor(checkSlip: boolean, checkTransport: boolean) {
     super();
-    this.inviteTitle = inviteTitle;
     this.checkSlip = checkSlip;
     this.checkTransport = checkTransport;
   }
 
-  toJSON(args?: string[]) {
+  toJSON(_args?: string[]) {
     const object = wrap(this).toObject();
 
     return Object.entries(object).reduce((acm, [key, value]) => {

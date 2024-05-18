@@ -3,9 +3,11 @@ import { ERROR_MESSAGES } from '@const';
 import { CreateGuestRequestBody, EditGuestRequestBody } from '@types';
 import { DI } from '../index';
 import {
-  getAllGuests,
+  getAllGuestsFromDB,
+  getAllGuestsFromDBByInviteGroup,
   getGuestByFirstLastName,
   getGuestById,
+  removeGuestFromDB,
   saveGuestToDB
 } from '@repository';
 import { wrap } from '@mikro-orm/core';
@@ -25,21 +27,24 @@ export const getGuest = async (uuid: string): Promise<GuestEntity> => {
   return guest;
 };
 
-export const getGuests = async (): Promise<GuestEntity[]> =>
-  (await getAllGuests()) || [];
+export const getAllGuests = async (
+  inviteGroup: string
+): Promise<GuestEntity[]> => {
+  if (!inviteGroup) {
+    return (await getAllGuestsFromDB()) || [];
+  }
 
-export const removeGuest = async (
-  uuid: string,
-  modifyBy: AdminEntity
-): Promise<GuestEntity> => {
+  return (
+    (await getAllGuestsFromDBByInviteGroup(
+      inviteGroup === 'empty' ? '' : inviteGroup
+    )) || []
+  );
+};
+
+export const removeGuest = async (uuid: string): Promise<GuestEntity> => {
   const guest = await getGuest(uuid);
 
-  wrap(guest).assign({
-    isRemoved: true,
-    modifyBy
-  });
-
-  await saveGuest(guest);
+  await removeGuestEntity(guest);
 
   return guest;
 };
@@ -95,6 +100,17 @@ const saveGuest = async (guest: GuestEntity): Promise<void> => {
   try {
     await saveGuestToDB(guest);
     DI.logger.debug(`Guest was saved to db Guest: ${guest}`);
+
+    return Promise.resolve();
+  } catch (_error) {
+    throw new InternalServerError(GUEST_SAVING_ERROR);
+  }
+};
+
+const removeGuestEntity = async (guest: GuestEntity): Promise<void> => {
+  try {
+    await removeGuestFromDB(guest);
+    DI.logger.debug(`Guest was removed from db Guest: ${guest}`);
 
     return Promise.resolve();
   } catch (_error) {

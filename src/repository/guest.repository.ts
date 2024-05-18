@@ -4,10 +4,21 @@ import { GuestEntity } from '@entities';
 import { DI } from '../index';
 import { executeDbLogError } from '../utils';
 
-export const getAllGuests = async (): Promise<GuestEntity[] | null> =>
+export const getAllGuestsFromDB = async (): Promise<GuestEntity[] | null> =>
+  executeDbLogError<GuestEntity[] | null>(() =>
+    DI.guestRepository.findAll({ populate: ['createdBy', 'modifyBy'] })
+  );
+
+export const getAllGuestsFromDBByInviteGroup = async (
+  inviteGroupId: string
+): Promise<GuestEntity[] | null> =>
   executeDbLogError<GuestEntity[] | null>(() =>
     DI.guestRepository.find(
-      { isRemoved: false },
+      {
+        inviteGroup: inviteGroupId
+          ? { _id: new ObjectId(inviteGroupId) }
+          : { $eq: null }
+      },
       { populate: ['createdBy', 'modifyBy'] }
     )
   );
@@ -49,3 +60,6 @@ export const getGuestByFirstLastName = async (
 
 export const saveGuestToDB = async (guest: GuestEntity): Promise<void> =>
   executeDbLogError<void>(() => DI.em.persist(guest).flush());
+
+export const removeGuestFromDB = async (guest: GuestEntity): Promise<void> =>
+  executeDbLogError<void>(() => DI.em.remove(guest).flush());

@@ -40,11 +40,14 @@ export const getInviteGroupByGroupName = async (
   );
 
 export const removeInviteGroupById = async (id: string): Promise<void> =>
-  executeDbLogError<void>(() =>
-    DI.inviteGroupRepository.nativeDelete({ _id: new ObjectId(id) })
-  );
+  executeDbLogError<void>(() => DI.em.remove({ _id: new ObjectId(id) }));
 
 export const saveInviteGroupToDB = async (
   inviteGroup: InviteGroupEntity
 ): Promise<void> =>
   executeDbLogError<void>(() => DI.em.persist(inviteGroup).flush());
+
+export const removeInviteGroupFromDB = async (
+  inviteGroup: InviteGroupEntity
+): Promise<void> =>
+  executeDbLogError<void>(() => DI.em.remove(inviteGroup).flush());
