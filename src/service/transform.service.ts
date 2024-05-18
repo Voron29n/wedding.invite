@@ -1,10 +1,5 @@
-import {
-  AdminEntity,
-  GuestEntity,
-  InvitationEntity,
-  InviteGroupEntity
-} from '@entities';
-import { AdminType, GuestType, InvitationType, InviteGroupType } from '@types';
+import { AdminEntity, GuestEntity } from '@entities';
+import { AdminType, GuestType } from '@types';
 
 export const transformAdminToRespType = ({
   id,
@@ -23,6 +18,7 @@ export const transformGuestToRespType = ({
   firstName,
   lastName,
   side,
+  gender,
   isAdult,
   inviteId
 }: GuestEntity): GuestType => ({
@@ -30,6 +26,7 @@ export const transformGuestToRespType = ({
   firstName,
   lastName,
   side,
+  gender,
   isAdult,
   inviteId: inviteId || ''
 });

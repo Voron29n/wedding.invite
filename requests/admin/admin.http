@@ -1,5 +1,5 @@
 ### Login admin
-POST {{host}}/api/auth/login/admin
+POST {{host}}/api/data/auth/login/admin
 Content-Type: application/json
 
 {
@@ -15,7 +15,7 @@ Content-Type: application/json
 %}
 
 ### Create admin
-POST {{host}}/api/admin/register
+POST {{host}}/api/data/admin/register
 Content-Type: application/json
 #Authorization: Bearer {{accessToken}}
 

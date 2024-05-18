@@ -6,7 +6,10 @@ import { executeDbLogError } from '../utils';
 
 export const getAllGuests = async (): Promise<GuestEntity[] | null> =>
   executeDbLogError<GuestEntity[] | null>(() =>
-    DI.guestRepository.findAll({ populate: ['createdBy', 'modifyBy'] })
+    DI.guestRepository.find(
+      { isRemoved: false },
+      { populate: ['createdBy', 'modifyBy'] }
+    )
   );
 
 export const getGuestsByIds = async (

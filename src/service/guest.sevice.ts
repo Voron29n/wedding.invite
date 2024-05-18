@@ -65,7 +65,7 @@ export const editGuest = async (
 };
 
 export const createGuest = async (
-  { firstName, lastName, side, isAdult }: CreateGuestRequestBody,
+  { firstName, lastName, side, gender, isAdult }: CreateGuestRequestBody,
   createdBy: AdminEntity
 ): Promise<GuestEntity> => {
   const isGuestExist = !!(await getGuestByFirstLastName(firstName, lastName));
@@ -77,7 +77,14 @@ export const createGuest = async (
     throw new BadRequestError(GUEST_ALREADY_EXIST);
   }
 
-  const guest = new GuestEntity(firstName, lastName, side, isAdult, createdBy);
+  const guest = new GuestEntity(
+    firstName,
+    lastName,
+    side,
+    gender,
+    isAdult,
+    createdBy
+  );
 
   await saveGuest(guest);
 

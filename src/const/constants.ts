@@ -1,14 +1,14 @@
 export const API = {
   HEALTH: '/health',
   ADMIN_ACCESS: {
-    GUESTS: '/api/guests',
-    ADMINS: '/api/admins',
-    INVITE_GROUPS: '/api/inviteGroups'
+    GUESTS: '/api/data/guests',
+    ADMINS: '/api/data/admins',
+    INVITE_GROUPS: '/api/data/inviteGroups'
   },
   GUEST_ACCESS: {
-    INVITE_INFO: '/api/inviteInfo'
+    INVITE_INFO: '/api/data/inviteInfo'
   },
-  AUTH: '/api/auth'
+  AUTH: '/api/data/auth'
 };
 
 export const AUTH = {

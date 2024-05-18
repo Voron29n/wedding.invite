@@ -2,7 +2,7 @@ import crypto from 'crypto';
 
 import { Entity, Enum, ManyToOne, Property, Unique } from '@mikro-orm/core';
 
-import { GuestSide, Role } from '@types';
+import { GuestGender, GuestSide, Role } from '@types';
 
 import { AdminEntity } from './admin.entity';
 import { InviteGroupEntity } from './inviteGroup.entity';
@@ -24,6 +24,9 @@ export class GuestEntity extends UserEntity {
 
   @Enum(() => GuestSide)
   side: GuestSide;
+
+  @Enum(() => GuestGender)
+  gender: GuestGender;
 
   @Property({ default: false })
   isAdult: boolean;
@@ -47,6 +50,7 @@ export class GuestEntity extends UserEntity {
     firstName: string,
     lastName: string,
     side: GuestSide,
+    gender: GuestGender,
     isAdult: boolean,
     createdBy: AdminEntity
   ) {
@@ -55,6 +59,7 @@ export class GuestEntity extends UserEntity {
     this.firstName = firstName;
     this.lastName = lastName;
     this.side = side;
+    this.gender = gender;
     this.isAdult = isAdult;
     this.createdBy = createdBy;
   }

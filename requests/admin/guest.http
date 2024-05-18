@@ -1,5 +1,5 @@
 ### Login admin
-POST {{host}}/api/auth/login/admin
+POST {{host}}/api/data/auth/login/admin
 Content-Type: application/json
 
 {
@@ -15,14 +15,15 @@ Content-Type: application/json
 %}
 
 ### Create guest
-POST {{host}}/api/guests
+POST {{host}}/api/data/guests
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
 {
-  "firstName": "{{firstName}} 123",
+  "firstName": "{{firstName}} for remove 2",
   "lastName": "{{lastName}}",
   "side": "{{side}}",
+  "gender": "{{gender}}",
   "isAdult": true
 }
 
@@ -34,7 +35,7 @@ Authorization: Bearer {{accessToken}}
 %}
 
 ### Edit guest
-PUT {{host}}/api/guests
+PUT {{host}}/api/data/guests
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
@@ -50,7 +51,7 @@ Authorization: Bearer {{accessToken}}
 %}
 
 ### Remove guest
-DELETE {{host}}/api/guests/{{removeGuestId}}
+DELETE {{host}}/api/data/guests/{{removeGuestId}}
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
@@ -61,7 +62,7 @@ Authorization: Bearer {{accessToken}}
 %}
 
 ### Get guest
-GET {{host}}/api/guests/65c4f617c17a841a58c9ea47
+GET {{host}}/api/data/guests/65c4f617c17a841a58c9ea47
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
@@ -72,7 +73,7 @@ Authorization: Bearer {{accessToken}}
 %}
 
 ### Get guest
-GET {{host}}/api/guests
+GET {{host}}/api/data/guests
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 

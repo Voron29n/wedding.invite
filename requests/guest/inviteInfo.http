@@ -1,5 +1,5 @@
 ### Login admin
-POST {{host}}/api/auth/login/guest
+POST {{host}}/api/data/api/auth/login/guest
 Content-Type: application/json
 
 {
@@ -14,7 +14,7 @@ Content-Type: application/json
 %}
 
 ### Get invite info
-GET {{host}}/api/inviteInfo
+GET {{host}}/api/data/api/inviteInfo
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 
