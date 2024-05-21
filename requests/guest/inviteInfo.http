@@ -3,7 +3,7 @@ POST {{host}}/api/data/auth/login/guest
 Content-Type: application/json
 
 {
-  "inviteId": "3d7fdede-135f-4164-8949-647ce08b0025"
+  "inviteId": "bad7e35f-d1d8-4b97-9342-1f2ba78b8b24"
 }
 
 > {%
@@ -14,7 +14,7 @@ Content-Type: application/json
 %}
 
 ### Get invite info
-GET {{host}}/api/data/api/inviteInfo
+GET {{host}}/api/data/inviteInfo
 Content-Type: application/json
 Authorization: Bearer {{accessToken}}
 

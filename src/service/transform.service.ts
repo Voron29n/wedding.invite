@@ -1,12 +1,12 @@
 import { AdminEntity, GuestEntity } from '@entities';
-import { AdminType, GuestType } from '@types';
+import { AuthAdminType, GuestType } from '@types';
 
 export const transformAdminToRespType = ({
   id,
   password,
   email,
   role
-}: AdminEntity): AdminType => ({
+}: AdminEntity): AuthAdminType => ({
   id,
   password,
   email,

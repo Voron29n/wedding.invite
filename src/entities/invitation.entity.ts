@@ -1,7 +1,8 @@
-import { Entity, OneToOne, Property, wrap } from '@mikro-orm/core';
+import { Entity, Enum, OneToOne, Property, wrap } from '@mikro-orm/core';
 
 import { BaseEntity } from './base.entity';
 import { InviteGroupEntity } from './inviteGroup.entity';
+import { TransferFrom } from '@types';
 
 @Entity({
   tableName: 'invitation'
@@ -13,13 +14,21 @@ export class InvitationEntity extends BaseEntity {
   @Property({ default: false })
   checkTransport: boolean;
 
+  @Enum(() => TransferFrom)
+  transportFrom: TransferFrom;
+
   @OneToOne(() => InviteGroupEntity, { nullable: true })
   inviteGroup?: InviteGroupEntity;
 
-  constructor(checkSlip: boolean, checkTransport: boolean) {
+  constructor(
+    checkSlip: boolean,
+    checkTransport: boolean,
+    transportFrom: TransferFrom
+  ) {
     super();
     this.checkSlip = checkSlip;
     this.checkTransport = checkTransport;
+    this.transportFrom = transportFrom;
   }
 
   toJSON(_args?: string[]) {

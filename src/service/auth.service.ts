@@ -21,8 +21,12 @@ export const loginAdmin = async ({
   email
 }: LoginAdminRequestBody): Promise<LoginTokenData> => {
   const admin = await getAdminByEmail(email);
+  const comparePasswordDB = await bcrypt.compare(
+    password,
+    admin?.password || ''
+  );
 
-  if (!admin || (await bcrypt.compare(admin.password, password))) {
+  if (!admin || !comparePasswordDB) {
     throw new BadRequestError(ERROR_MESSAGES.INVALID_CREDENTIALS);
   }
 
@@ -45,7 +49,7 @@ export const loginGuest = async ({
 
   return {
     ...createAuthResponse(guest),
-    name: guest.firstName,
+    name: `${guest.firstName} ${guest.lastName}`,
     role: guest.role,
     id: guest.id
   };

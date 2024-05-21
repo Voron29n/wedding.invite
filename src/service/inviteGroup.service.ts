@@ -55,7 +55,11 @@ export const createInviteGroup = async (
   const newInviteGroup = new InviteGroupEntity(
     groupName,
     guestsEntity,
-    new InvitationEntity(invitation.checkSlip, invitation.checkTransport),
+    new InvitationEntity(
+      invitation.checkSlip,
+      invitation.checkTransport,
+      invitation.transportFrom
+    ),
     createdBy
   );
 

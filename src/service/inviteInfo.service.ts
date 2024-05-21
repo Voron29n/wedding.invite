@@ -1,16 +1,17 @@
-import { InviteGroupEntity } from '@entities';
-import { getInviteGroupByGuestId } from '@repository';
+import { GuestEntity, InviteGroupEntity } from '@entities';
 import { InternalServerError } from '@errors';
 import { ERROR_MESSAGES } from '@const';
+import { DI } from '@src/index';
 
 const {
   inviteGroup: { INVITE_GROUP_NOT_EXISTED }
 } = ERROR_MESSAGES;
 
 export const getInviteInfo = async (
-  guestId: string
+  guest: GuestEntity
 ): Promise<InviteGroupEntity> => {
-  const inviteGroup = await getInviteGroupByGuestId(guestId);
+  await DI.em.populate(guest, ['inviteGroup']);
+  const inviteGroup = guest.inviteGroup as InviteGroupEntity;
 
   if (!inviteGroup) {
     throw new InternalServerError(INVITE_GROUP_NOT_EXISTED);

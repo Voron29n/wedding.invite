@@ -4,24 +4,14 @@ import { ERROR_MESSAGES } from '@const';
 import { AdminEntity } from '@entities';
 import { BadRequestError, InternalServerError } from '@errors';
 import { DI } from '@src/index';
-import { getAdminByEmail, getAdminById, saveAdminToDB } from '@repository';
+import { getAdminByEmail, saveAdminToDB } from '@repository';
 import { CreateAdminRequestBody, UserType } from '@types';
 
 import { transformAdminToRespType } from './transform.service';
 
 const {
-  admin: { ADMIN_ALREADY_EXIST, ADMIN_NOT_EXISTED }
+  admin: { ADMIN_ALREADY_EXIST }
 } = ERROR_MESSAGES;
-
-export const getAdmin = async (uuid: string): Promise<AdminEntity> => {
-  const admin = await getAdminById(uuid);
-
-  if (!admin) {
-    throw new InternalServerError(ADMIN_NOT_EXISTED);
-  }
-
-  return admin;
-};
 
 const saveUser = async (user: AdminEntity): Promise<void> => {
   try {
@@ -44,7 +34,8 @@ export const createAdmin = async ({
     throw new BadRequestError(ADMIN_ALREADY_EXIST);
   }
 
-  const encryptedPassword = await bcrypt.hash(password, 10);
+  const salt = await bcrypt.genSalt(10);
+  const encryptedPassword = await bcrypt.hash(password, salt);
   const user = new AdminEntity(email.toLowerCase(), encryptedPassword);
 
   await saveUser(user);

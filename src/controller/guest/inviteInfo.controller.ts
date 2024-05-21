@@ -10,7 +10,7 @@ const inviteInfo: Router = Router();
 inviteInfo.get('/', async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { guest } = req as AuthValidatedRequest<ValidatedRequestSchema>;
-    const inviteGroup = await getInviteInfo(guest.id);
+    const inviteGroup = await getInviteInfo(guest);
 
     sendEntityDataResponse<InviteGroupEntity>(res, inviteGroup, Role.guest);
   } catch (error) {

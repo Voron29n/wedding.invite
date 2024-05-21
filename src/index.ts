@@ -6,7 +6,13 @@ import express, { Express } from 'express';
 import { Logger } from 'winston';
 import { AdminEntity, GuestEntity, InviteGroupEntity } from '@entities';
 
-import { adminRouter, authRouter, guestRouter, inviteGroup } from '@controller';
+import {
+  adminRouter,
+  authRouter,
+  guestRouter,
+  inviteGroup,
+  inviteInfo
+} from '@controller';
 import { authMiddleware, isAdmin, isGuest } from '@middleware';
 import { errorMiddleware } from '@errors';
 import { API } from '@const';
@@ -17,7 +23,6 @@ import {
   initLogger
 } from '@configuration';
 import { healthCheckRouter } from './healthCheck';
-import { inviteInfo } from '@src/controller/guest';
 
 import 'module-alias/register';
 

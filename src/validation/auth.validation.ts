@@ -3,8 +3,7 @@ import { ContainerTypes, ValidatedRequestSchema } from 'express-joi-validation';
 import Joi from 'joi';
 import 'joi-extract-type';
 
-import { VALIDATION } from '../const';
-import { Role } from '@types';
+import { VALIDATION } from '@const';
 
 const authorizationHeaderSchema = Joi.object({
   authorization: Joi.string().required()
