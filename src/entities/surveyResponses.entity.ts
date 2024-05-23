@@ -13,7 +13,7 @@ export class SurveyResponsesEntity extends UserEntity {
   startPlace: StartPlace;
 
   @Property()
-  transportation: string;
+  isPrivateTransport: boolean;
 
   @Property({ default: [] })
   presentOnSecondDay: string[];
@@ -27,7 +27,7 @@ export class SurveyResponsesEntity extends UserEntity {
   constructor(
     presentGuests: string[],
     startPlace: StartPlace,
-    transportation: string,
+    isPrivateTransport: boolean,
     presentOnSecondDay: string[],
     needSleepPlace: boolean,
     likeDrinks: string[]
@@ -35,7 +35,7 @@ export class SurveyResponsesEntity extends UserEntity {
     super();
     this.presentGuests = presentGuests;
     this.startPlace = startPlace;
-    this.transportation = transportation;
+    this.isPrivateTransport = isPrivateTransport;
     this.presentOnSecondDay = presentOnSecondDay;
     this.needSleepPlace = needSleepPlace;
     this.likeDrinks = likeDrinks;

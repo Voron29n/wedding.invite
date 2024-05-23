@@ -14,7 +14,6 @@ import { BaseEntity } from './base.entity';
 import { GuestEntity } from './guest.entity';
 import { InvitationEntity } from './invitation.entity';
 import { Role } from '@types';
-import { SurveyResponsesEntity } from '@src/entities/surveyResponses.entity';
 
 @Entity({
   tableName: 'invite_group'
@@ -29,9 +28,6 @@ export class InviteGroupEntity extends BaseEntity {
 
   @OneToOne(() => InvitationEntity)
   invitation: InvitationEntity;
-
-  @OneToOne(() => SurveyResponsesEntity)
-  questions?: SurveyResponsesEntity;
 
   @ManyToOne(() => AdminEntity, {
     nullable: true,
