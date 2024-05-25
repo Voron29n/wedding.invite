@@ -4,6 +4,7 @@ import { EntityManager, EntityRepository, MikroORM } from '@mikro-orm/mongodb';
 import dotenv from 'dotenv';
 import express, { Express } from 'express';
 import { Logger } from 'winston';
+
 import {
   AdminEntity,
   GuestEntity,
@@ -28,8 +29,6 @@ import {
   initLogger
 } from '@configuration';
 import { healthCheckRouter } from './healthCheck';
-
-import 'module-alias/register';
 
 dotenv.config();
 

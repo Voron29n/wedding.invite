@@ -30,7 +30,7 @@ const initDbData = async (): Promise<void> => {
 
     return Promise.resolve();
   } catch (e) {
-    DI.logger.error('DB was not connected');
+    DI.logger.error('DB was not connected: ', e);
     return Promise.reject('DB error, server should stopped');
   }
 };
