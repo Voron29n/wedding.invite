@@ -4,7 +4,12 @@ import { EntityManager, EntityRepository, MikroORM } from '@mikro-orm/mongodb';
 import dotenv from 'dotenv';
 import express, { Express } from 'express';
 import { Logger } from 'winston';
-import { AdminEntity, GuestEntity, InviteGroupEntity } from '@entities';
+import {
+  AdminEntity,
+  GuestEntity,
+  InviteGroupEntity,
+  SurveyResponsesEntity
+} from '@entities';
 
 import {
   adminRouter,
@@ -36,6 +41,7 @@ export const DI = {} as {
   userRepository: EntityRepository<AdminEntity>;
   guestRepository: EntityRepository<GuestEntity>;
   inviteGroupRepository: EntityRepository<InviteGroupEntity>;
+  surveyResponsesRepository: EntityRepository<SurveyResponsesEntity>;
   logger: Logger;
 };
 let connections: Array<Socket> = [];

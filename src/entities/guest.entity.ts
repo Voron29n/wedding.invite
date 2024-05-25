@@ -1,6 +1,13 @@
 import crypto from 'crypto';
 
-import { Entity, Enum, ManyToOne, Property, Unique } from '@mikro-orm/core';
+import {
+  Entity,
+  Enum,
+  ManyToOne,
+  Property,
+  Unique,
+  wrap
+} from '@mikro-orm/core';
 
 import { GuestGender, GuestSide, Role } from '@types';
 
@@ -62,5 +69,28 @@ export class GuestEntity extends UserEntity {
     this.gender = gender;
     this.isAdult = isAdult;
     this.createdBy = createdBy;
+  }
+
+  toJSON(args?: string[]) {
+    const object = wrap(this).toObject();
+
+    return args?.includes(Role.admin)
+      ? object
+      : Object.entries(object).reduce((acm, [key, value]) => {
+          if (
+            ![
+              '_id',
+              'createdAt',
+              'updatedAt',
+              'createdBy',
+              'modifyBy',
+              'inviteGroup'
+            ].includes(key)
+          ) {
+            (acm as any)[key] = value;
+          }
+
+          return acm;
+        }, {} as any);
   }
 }

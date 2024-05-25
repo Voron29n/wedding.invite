@@ -1,4 +1,23 @@
+import { GuestEntity, InviteGroupEntity } from '@entities';
+
 export enum StartPlace {
   church = 'church',
-  manor = 'manor'
+  manor = 'manor',
+  skip = 'skip'
 }
+
+export type SurveyResponsesType = {
+  createdBy: GuestEntity;
+  inviteGroup: InviteGroupEntity;
+  presentGuests: string[];
+  startPlace: StartPlace;
+  isPrivateTransport: boolean | null;
+  presentOnSecondDay: string[] | null;
+  needSleepPlace: boolean | null;
+  likeDrinks: string[] | null;
+};
+
+export type SurveyResponsesBodyType = Omit<
+  SurveyResponsesType,
+  'inviteGroup' | 'createdBy'
+>;

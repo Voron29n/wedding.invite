@@ -4,21 +4,21 @@ import Joi from 'joi';
 import 'joi-extract-type';
 import { StartPlace } from '@src/types/surveyResponses.type';
 
-const surveyResponsesBodySchema = Joi.object({
+const surveyResponseBodySchema = Joi.object({
   presentGuests: Joi.array().items(Joi.string()).min(0).required(),
-  presentOnSecondDay: Joi.array().items(Joi.string()).min(0).required(),
-  likeDrinks: Joi.array().items(Joi.string()).min(0).required(),
-  startPlace: Joi.valid(...Object.values(StartPlace)).required(),
-  transportation: Joi.string().required(),
-  needSleepPlace: Joi.boolean().required()
+  presentOnSecondDay: Joi.array().items(Joi.string()).min(0).optional(),
+  likeDrinks: Joi.array().items(Joi.string()).min(0).optional(),
+  startPlace: Joi.valid(...Object.values(StartPlace)).optional(),
+  isPrivateTransport: Joi.boolean().optional(),
+  needSleepPlace: Joi.boolean().optional()
 });
 
-interface SurveyResponsesRequestSchema extends ValidatedRequestSchema {
+interface SurveyResponseRequestSchema extends ValidatedRequestSchema {
   [ContainerTypes.Body]: JoiExtract.extractType<
-    typeof surveyResponsesBodySchema
+    typeof surveyResponseBodySchema
   >;
 }
 
-export { surveyResponsesBodySchema };
+export { surveyResponseBodySchema };
 
-export type { SurveyResponsesRequestSchema };
+export type { SurveyResponseRequestSchema };

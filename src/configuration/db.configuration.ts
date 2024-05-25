@@ -2,7 +2,12 @@ import { RequestContext } from '@mikro-orm/core';
 import { MikroORM, MongoDriver } from '@mikro-orm/mongodb';
 import { NextFunction, Request, Response } from 'express';
 
-import { AdminEntity, GuestEntity, InviteGroupEntity } from '@entities';
+import {
+  AdminEntity,
+  GuestEntity,
+  InviteGroupEntity,
+  SurveyResponsesEntity
+} from '@entities';
 import { DI } from '../index';
 import microOrmConfig from '../mikro-orm.config';
 
@@ -19,6 +24,9 @@ const initDbData = async (): Promise<void> => {
     DI.userRepository = DI.orm.em.getRepository(AdminEntity);
     DI.guestRepository = DI.orm.em.getRepository(GuestEntity);
     DI.inviteGroupRepository = DI.orm.em.getRepository(InviteGroupEntity);
+    DI.surveyResponsesRepository = DI.orm.em.getRepository(
+      SurveyResponsesEntity
+    );
 
     return Promise.resolve();
   } catch (e) {

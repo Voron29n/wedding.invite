@@ -14,6 +14,7 @@ import { BaseEntity } from './base.entity';
 import { GuestEntity } from './guest.entity';
 import { InvitationEntity } from './invitation.entity';
 import { Role } from '@types';
+import { SurveyResponsesEntity } from '@src/entities/surveyResponses.entity';
 
 @Entity({
   tableName: 'invite_group'
@@ -28,6 +29,11 @@ export class InviteGroupEntity extends BaseEntity {
 
   @OneToOne(() => InvitationEntity)
   invitation: InvitationEntity;
+
+  @OneToOne(() => SurveyResponsesEntity, {
+    nullable: true
+  })
+  surveyResponses?: SurveyResponsesEntity;
 
   @ManyToOne(() => AdminEntity, {
     nullable: true,
@@ -60,7 +66,15 @@ export class InviteGroupEntity extends BaseEntity {
     return args?.includes(Role.admin)
       ? object
       : Object.entries(object).reduce((acm, [key, value]) => {
-          if (!['_id', 'id', 'createdAt', 'updatedAt'].includes(key)) {
+          if (
+            ![
+              '_id',
+              'createdAt',
+              'updatedAt',
+              'createdBy',
+              'modifyBy'
+            ].includes(key)
+          ) {
             (acm as any)[key] = value;
           }
 

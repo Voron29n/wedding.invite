@@ -36,7 +36,16 @@ export class InvitationEntity extends BaseEntity {
 
     return Object.entries(object).reduce((acm, [key, value]) => {
       // skip the fields: createdAt, updatedAt, _id, id
-      if (!['createdAt', 'updatedAt', '_id', 'id'].includes(key)) {
+      if (
+        ![
+          'id',
+          '_id',
+          'createdAt',
+          'updatedAt',
+          'createdBy',
+          'modifyBy'
+        ].includes(key)
+      ) {
         (acm as any)[key] = value;
       }
 

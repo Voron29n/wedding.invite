@@ -22,6 +22,7 @@ import { sendDataResponse, sendEntityDataResponse } from '@src/utils';
 import {
   createGuestBodySchema,
   CreateGuestRequestSchema,
+  editGuestBodySchema,
   EditGuestRequestSchema
 } from '@validation';
 
@@ -96,6 +97,7 @@ guestRouter.get(
 
 guestRouter.put(
   '/',
+  validator.body(editGuestBodySchema),
   async (
     req: ValidatedRequest<EditGuestRequestSchema>,
     res: Response,

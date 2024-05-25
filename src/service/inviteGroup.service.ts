@@ -138,7 +138,7 @@ export const editInviteGroup = async (
   return inviteGroup;
 };
 
-const saveInviteGroupEntity = async (
+export const saveInviteGroupEntity = async (
   inviteGroup: InviteGroupEntity
 ): Promise<void> => {
   try {

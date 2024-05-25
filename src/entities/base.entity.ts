@@ -6,7 +6,7 @@ export interface BaseMap {
 }
 
 export class BaseEntity {
-  @PrimaryKey({ type: 'uuid', defaultRaw: 'uuid_generate_v4()' })
+  @PrimaryKey({ type: 'uuid', defaultRaw: 'uuid_generate_v4()', hidden: true })
   _id!: ObjectId;
 
   @SerializedPrimaryKey()
