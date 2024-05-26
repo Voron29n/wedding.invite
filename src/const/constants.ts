@@ -8,7 +8,8 @@ export const API = {
   GUEST_ACCESS: {
     INVITE_INFO: '/api/data/inviteInfo'
   },
-  AUTH: '/api/data/auth'
+  AUTH: '/api/data/auth',
+  INVITE_PRELOAD: '/api/data/invitePreload'
 };
 
 export const AUTH = {

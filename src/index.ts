@@ -16,6 +16,7 @@ import {
   adminRouter,
   authRouter,
   guestRouter,
+  invitePreload,
   inviteGroup,
   inviteInfo
 } from '@controller';
@@ -56,6 +57,7 @@ const startServer = async (logger: Logger) => {
       .use(express.json())
       .use(API.HEALTH, healthCheckRouter)
       .use(API.AUTH, authRouter)
+      .use(API.INVITE_PRELOAD, inviteInfo)
       .use(authMiddleware)
       // Admin access routes
       .use(API.ADMIN_ACCESS.GUESTS, isAdmin, guestRouter)

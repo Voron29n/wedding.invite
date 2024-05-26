@@ -7,6 +7,7 @@ export enum StartPlace {
 }
 
 export type SurveyResponsesType = {
+  // inviteId: string;
   createdBy: GuestEntity;
   inviteGroup: InviteGroupEntity;
   presentGuests: string[];

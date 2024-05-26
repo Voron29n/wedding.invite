@@ -28,9 +28,9 @@ Authorization: Bearer {{accessToken}}
 ### Post invite info survey
 POST {{host}}/api/data/inviteInfo/surveyResponse
 Content-Type: application/json
-Authorization: Bearer {{accessToken}}
 
 {
+  "inviteId": "bad7e35f-d1d8-4b97-9342-1f2ba78b8b24",
   "presentGuests": [
     "6648ca50a958ee13ce20f85d",
     "6648ca5fa958ee13ce20f85e"
@@ -58,9 +58,9 @@ Authorization: Bearer {{accessToken}}
 ### Post invite info survey - empty presentGuests
 POST {{host}}/api/data/inviteInfo/surveyResponse
 Content-Type: application/json
-Authorization: Bearer {{accessToken}}
 
 {
+  "inviteId": "bad7e35f-d1d8-4b97-9342-1f2ba78b8b24",
   "presentGuests": []
 }
 
@@ -71,6 +71,14 @@ Authorization: Bearer {{accessToken}}
   });
 %}
 
+### Get invite preload
+GET {{host}}/api/data/invitePreload/509369d5-54cd-47b3-ac58-4d790e9cb371
+Content-Type: application/json
 
+> {%
+  client.test('get invite info', function() {
+    client.assert(response.status === 200, "Remove guest OK");
+  });
+%}
 
 

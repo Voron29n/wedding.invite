@@ -5,6 +5,7 @@ import 'joi-extract-type';
 import { StartPlace } from '@src/types/surveyResponses.type';
 
 const surveyResponseBodySchema = Joi.object({
+  // inviteId: Joi.string().required(),
   presentGuests: Joi.array().items(Joi.string()).min(0).required(),
   presentOnSecondDay: Joi.array().items(Joi.string()).min(0).optional(),
   likeDrinks: Joi.array().items(Joi.string()).min(0).optional(),
