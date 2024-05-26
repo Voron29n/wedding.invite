@@ -10,7 +10,7 @@ export const getToken = (
   next: NextFunction
 ): string => {
   if (!req.headers?.[AUTH.AUTHORIZATION_HEADER]) {
-    next(new ForbiddenError(ERROR_MESSAGES.MUST_AUTHORIZED_USER));
+    throw new ForbiddenError(ERROR_MESSAGES.MUST_AUTHORIZED_USER);
   }
 
   const [tokenType, token] = req.headers[AUTH.AUTHORIZATION_HEADER]?.split(' ');

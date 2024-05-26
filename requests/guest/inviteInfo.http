@@ -1,22 +1,6 @@
-### Login admin
-POST {{host}}/api/data/auth/login/guest
-Content-Type: application/json
-
-{
-  "inviteId": "bad7e35f-d1d8-4b97-9342-1f2ba78b8b24"
-}
-
-> {%
-    client.test('Login admin', function() {
-        client.assert(response.status === 200, "Login user failed");
-        client.global.set('accessToken', response.body.data.accessToken)
-    });
-%}
-
 ### Get invite info
-GET {{host}}/api/data/inviteInfo
+GET {{host}}/api/data/inviteInfo/509369d5-54cd-47b3-ac58-4d790e9cb371
 Content-Type: application/json
-Authorization: Bearer {{accessToken}}
 
 > {%
     client.test('get invite info', function() {
@@ -68,16 +52,6 @@ Content-Type: application/json
 > {%
   client.test('post invite info survey', function() {
     client.assert(response.status === 200, "Post invite info survey OK");
-  });
-%}
-
-### Get invite preload
-GET {{host}}/api/data/invitePreload/509369d5-54cd-47b3-ac58-4d790e9cb371
-Content-Type: application/json
-
-> {%
-  client.test('get invite info', function() {
-    client.assert(response.status === 200, "Remove guest OK");
   });
 %}
 

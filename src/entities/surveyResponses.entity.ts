@@ -16,22 +16,22 @@ export class SurveyResponsesEntity extends BaseEntity {
   @OneToOne(() => InviteGroupEntity, { hidden: true })
   inviteGroup: InviteGroupEntity;
 
-  @Property({ default: [] })
+  @Property({ default: [], columnType: 'array' })
   presentGuests: string[];
 
   @Enum(() => StartPlace)
   startPlace?: StartPlace;
 
-  @Property({ nullable: true })
+  @Property({ nullable: true, columnType: 'boolean' })
   isPrivateTransport: boolean | null;
 
-  @Property({ nullable: true })
+  @Property({ nullable: true, columnType: 'array' })
   presentOnSecondDay: string[] | null;
 
-  @Property({ nullable: true })
+  @Property({ nullable: true, columnType: 'boolean' })
   needSleepPlace?: boolean | null;
 
-  @Property({ default: [], nullable: true })
+  @Property({ default: [], nullable: true, columnType: 'array' })
   likeDrinks?: string[] | null;
 
   @ManyToOne(() => GuestEntity, {

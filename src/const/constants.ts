@@ -8,8 +8,7 @@ export const API = {
   GUEST_ACCESS: {
     INVITE_INFO: '/api/data/inviteInfo'
   },
-  AUTH: '/api/data/auth',
-  INVITE_PRELOAD: '/api/data/invitePreload'
+  AUTH: '/api/data/auth'
 };
 
 export const AUTH = {
@@ -22,6 +21,7 @@ export const AUTH = {
 export const ERROR_MESSAGES = {
   NOT_AUTHORIZED: 'User is not authorized',
   INVALID_CREDENTIALS: 'Invalid credentials',
+  INVALID_INVITE_ID: 'Invalid invite Id',
   EMAIL_NOT_VALID: 'Email is not valid',
   USER_NOT_EXISTED: 'User is not existed',
   MUST_AUTHORIZED_USER: 'You must be authorized user',

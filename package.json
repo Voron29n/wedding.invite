@@ -54,6 +54,7 @@
   "_moduleAliases": {
     "@src": "dist",
     "@const": "dist/const",
+    "@utils": "dist/utils",
     "@controller": "dist/controller",
     "@configuration": "dist/configuration",
     "@entities": "dist/entities",

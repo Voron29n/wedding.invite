@@ -16,11 +16,10 @@ import {
   adminRouter,
   authRouter,
   guestRouter,
-  invitePreload,
   inviteGroup,
   inviteInfo
 } from '@controller';
-import { authMiddleware, isAdmin, isGuest } from '@middleware';
+import { authMiddleware, isAdmin } from '@middleware';
 import { errorMiddleware } from '@errors';
 import { API } from '@const';
 import {
@@ -57,14 +56,12 @@ const startServer = async (logger: Logger) => {
       .use(express.json())
       .use(API.HEALTH, healthCheckRouter)
       .use(API.AUTH, authRouter)
-      .use(API.INVITE_PRELOAD, inviteInfo)
+      .use(API.GUEST_ACCESS.INVITE_INFO, inviteInfo)
       .use(authMiddleware)
       // Admin access routes
       .use(API.ADMIN_ACCESS.GUESTS, isAdmin, guestRouter)
       .use(API.ADMIN_ACCESS.ADMINS, isAdmin, adminRouter)
       .use(API.ADMIN_ACCESS.INVITE_GROUPS, isAdmin, inviteGroup)
-      // Guest access routes
-      .use(API.GUEST_ACCESS.INVITE_INFO, isGuest, inviteInfo)
 
       // Error handling middleware
       .use(errorMiddleware);

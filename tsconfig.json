@@ -20,6 +20,9 @@
       "@src/*": [
         "./*"
       ],
+      "@utils": [
+        "utils/index"
+      ],
       "@const": [
         "const/index"
       ],

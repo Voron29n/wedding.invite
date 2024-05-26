@@ -5,7 +5,7 @@ import { ERROR_MESSAGES } from '@const';
 import { InternalServerError } from '@errors';
 import { ErrorResponse, ResponseEntity, Role } from '@types';
 
-import { DI } from './index';
+import { DI } from '@src/index';
 
 const wrapEntityToJSON = <Type>(entity: Type, authRole: Role) =>
   wrap(entity).toJSON(authRole);
