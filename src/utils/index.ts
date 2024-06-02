@@ -58,3 +58,9 @@ export const executeDbLogError = async <Type>(
     throw new InternalServerError(ERROR_MESSAGES.DB_FAILED);
   }
 };
+
+export const serializeId = (ownObject: any, resultObject: any) => {
+  if (!resultObject['id'] && ownObject['_id'].toString()) {
+    resultObject['id'] = ownObject['_id'].toString();
+  }
+};

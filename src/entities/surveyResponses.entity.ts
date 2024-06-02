@@ -8,6 +8,7 @@ import {
 } from '@mikro-orm/core';
 import { BaseEntity, GuestEntity, InviteGroupEntity } from '@entities';
 import { Role, StartPlace, SurveyResponsesType } from '@types';
+import { serializeId } from '@utils';
 
 @Entity({
   tableName: 'survey_responses'
@@ -72,6 +73,8 @@ export class SurveyResponsesEntity extends BaseEntity {
   toJSON(args?: string[]) {
     const object = wrap(this).toObject();
 
+    serializeId(this, object);
+
     return args?.includes(Role.admin)
       ? object
       : Object.entries(object).reduce((acm, [key, value]) => {
@@ -81,6 +84,6 @@ export class SurveyResponsesEntity extends BaseEntity {
           }
 
           return acm;
-        }, {});
+        }, {} as any);
   }
 }

@@ -3,6 +3,7 @@ import { Entity, Enum, OneToOne, Property, wrap } from '@mikro-orm/core';
 import { BaseEntity } from './base.entity';
 import { InviteGroupEntity } from './inviteGroup.entity';
 import { TransferFrom } from '@types';
+import { serializeId } from '@utils';
 
 @Entity({
   tableName: 'invitation'
@@ -34,6 +35,8 @@ export class InvitationEntity extends BaseEntity {
   toJSON(_args?: string[]) {
     const object = wrap(this).toObject();
 
+    serializeId(this, object);
+
     return Object.entries(object).reduce((acm, [key, value]) => {
       // skip the fields: createdAt, updatedAt, _id, id
       if (
@@ -50,6 +53,6 @@ export class InvitationEntity extends BaseEntity {
       }
 
       return acm;
-    }, {});
+    }, {} as any);
   }
 }

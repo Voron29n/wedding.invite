@@ -14,6 +14,7 @@ import { GuestGender, GuestSide, Role } from '@types';
 import { AdminEntity } from './admin.entity';
 import { InviteGroupEntity } from './inviteGroup.entity';
 import { UserEntity } from './user.entity';
+import { serializeId } from '@utils';
 
 @Entity({
   tableName: 'guest'
@@ -76,6 +77,8 @@ export class GuestEntity extends UserEntity {
 
   toJSON(args?: string[]) {
     const object = wrap(this).toObject();
+
+    serializeId(this, object);
 
     return args?.includes(Role.admin)
       ? object
