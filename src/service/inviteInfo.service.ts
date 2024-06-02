@@ -12,6 +12,7 @@ import {
 } from '@src/types/surveyResponses.type';
 import { saveInviteGroupEntity } from '@src/service/inviteGroup.service';
 import { wrap } from '@mikro-orm/core';
+import { saveGuestToDB } from '@repository';
 
 const {
   inviteGroup: { INVITE_GROUP_NOT_EXISTED }
@@ -39,6 +40,10 @@ export const getInviteInfo = async (
   guest: GuestEntity
 ): Promise<InviteGroupEntity> => {
   const inviteGroup = await getInviteGroupForGuest(guest);
+
+  wrap(guest).assign({ lastSeenAt: new Date() }, { merge: true });
+
+  await saveGuestToDB(guest);
 
   await DI.em.populate(inviteGroup, [
     'surveyResponses',

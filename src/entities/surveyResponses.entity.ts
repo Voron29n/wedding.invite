@@ -36,13 +36,15 @@ export class SurveyResponsesEntity extends BaseEntity {
 
   @ManyToOne(() => GuestEntity, {
     nullable: true,
-    serializer: value => value.firstName || null
+    serializer: value =>
+      (value && `${value.firstName} ${value.lastName}`) || null
   })
   createdBy: GuestEntity;
 
   @ManyToOne(() => GuestEntity, {
     nullable: true,
-    serializer: value => value?.firstName || null
+    serializer: value =>
+      (value && `${value.firstName} ${value.lastName}`) || null
   })
   modifyBy?: GuestEntity;
 
@@ -74,16 +76,7 @@ export class SurveyResponsesEntity extends BaseEntity {
       ? object
       : Object.entries(object).reduce((acm, [key, value]) => {
           // skip the fields: createdAt, updatedAt, _id, id
-          if (
-            ![
-              'id',
-              '_id',
-              'createdAt',
-              'updatedAt',
-              'createdBy',
-              'modifyBy'
-            ].includes(key)
-          ) {
+          if (!['id', '_id'].includes(key)) {
             (acm as any)[key] = value;
           }
 

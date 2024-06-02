@@ -2,7 +2,7 @@ import { ObjectId } from '@mikro-orm/mongodb';
 
 import { InviteGroupEntity } from '@entities';
 import { DI } from '../index';
-import { executeDbLogError } from '../utils';
+import { executeDbLogError } from '@utils';
 
 export const getInviteGroupByGuestId = async (
   guestId: string
@@ -19,7 +19,15 @@ export const getAllInviteGroups = async (): Promise<
   InviteGroupEntity[] | null
 > =>
   executeDbLogError<InviteGroupEntity[] | null>(() =>
-    DI.inviteGroupRepository.findAll({ populate: ['guests', 'invitation'] })
+    DI.inviteGroupRepository.findAll({
+      populate: [
+        'guests',
+        'invitation',
+        'surveyResponses',
+        'surveyResponses.modifyBy',
+        'surveyResponses.createdBy'
+      ]
+    })
   );
 
 export const getInviteGroupById = async (

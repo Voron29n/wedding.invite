@@ -53,6 +53,9 @@ export class GuestEntity extends UserEntity {
   })
   modifyBy?: AdminEntity;
 
+  @Property({ nullable: true })
+  lastSeenAt?: Date;
+
   constructor(
     firstName: string,
     lastName: string,

@@ -1,5 +1,5 @@
 ### Get invite info
-GET {{host}}/api/data/inviteInfo/509369d5-54cd-47b3-ac58-4d790e9cb371
+GET {{host}}/api/data/inviteInfo/6098fe17-d26e-457d-b59a-878a94af8978
 Content-Type: application/json
 
 > {%
@@ -16,14 +16,12 @@ Content-Type: application/json
 {
   "inviteId": "bad7e35f-d1d8-4b97-9342-1f2ba78b8b24",
   "presentGuests": [
-    "6648ca50a958ee13ce20f85d",
-    "6648ca5fa958ee13ce20f85e"
+    "6648ca50a958ee13ce20f85d"
   ],
   "startPlace": "church",
   "isPrivateTransport": false,
   "presentOnSecondDay": [
-    "6648ca50a958ee13ce20f85d",
-    "6648ca5fa958ee13ce20f85e"
+    "6648ca50a958ee13ce20f85d"
   ],
   "needSleepPlace": false,
   "likeDrinks": [
