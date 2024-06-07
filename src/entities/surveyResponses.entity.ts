@@ -20,6 +20,9 @@ export class SurveyResponsesEntity extends BaseEntity {
   @Property({ default: [], columnType: 'array' })
   presentGuests: string[];
 
+  @Property({ nullable: true, columnType: 'boolean' })
+  noAlonePresent: boolean | null;
+
   @Enum(() => StartPlace)
   startPlace?: StartPlace;
 
@@ -28,6 +31,9 @@ export class SurveyResponsesEntity extends BaseEntity {
 
   @Property({ nullable: true, columnType: 'array' })
   presentOnSecondDay: string[] | null;
+
+  @Property({ nullable: true, columnType: 'boolean' })
+  noAloneOnSecondDay: boolean | null;
 
   @Property({ nullable: true, columnType: 'boolean' })
   needSleepPlace?: boolean | null;
@@ -55,6 +61,8 @@ export class SurveyResponsesEntity extends BaseEntity {
     presentGuests,
     startPlace,
     isPrivateTransport,
+    noAlonePresent,
+    noAloneOnSecondDay,
     presentOnSecondDay,
     needSleepPlace,
     likeDrinks
@@ -64,6 +72,8 @@ export class SurveyResponsesEntity extends BaseEntity {
     this.createdBy = createdBy;
     this.presentGuests = presentGuests;
     this.startPlace = startPlace;
+    this.noAlonePresent = noAlonePresent;
+    this.noAloneOnSecondDay = noAloneOnSecondDay;
     this.isPrivateTransport = isPrivateTransport;
     this.presentOnSecondDay = presentOnSecondDay;
     this.needSleepPlace = needSleepPlace;

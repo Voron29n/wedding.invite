@@ -15,6 +15,8 @@ export type SurveyResponsesType = {
   isPrivateTransport: boolean | null;
   presentOnSecondDay: string[] | null;
   needSleepPlace: boolean | null;
+  noAlonePresent: boolean | null;
+  noAloneOnSecondDay: boolean | null;
   likeDrinks: string[] | null;
 };
 

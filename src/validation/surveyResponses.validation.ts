@@ -11,7 +11,9 @@ const surveyResponseBodySchema = Joi.object({
   likeDrinks: Joi.array().items(Joi.string()).min(0).optional(),
   startPlace: Joi.valid(...Object.values(StartPlace)).optional(),
   isPrivateTransport: Joi.boolean().optional(),
-  needSleepPlace: Joi.boolean().optional()
+  needSleepPlace: Joi.boolean().optional(),
+  noAlonePresent: Joi.boolean().optional(),
+  noAloneOnSecondDay: Joi.boolean().optional()
 });
 
 interface SurveyResponseRequestSchema extends ValidatedRequestSchema {
