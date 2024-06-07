@@ -6,6 +6,7 @@ export enum TransferFrom {
 type InvitationType = {
   checkSlip: boolean;
   checkTransport: boolean;
+  needOneMorePlace: boolean;
   transportFrom: TransferFrom;
 };
 

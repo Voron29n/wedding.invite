@@ -58,6 +58,7 @@ export const createInviteGroup = async (
     new InvitationEntity(
       invitation.checkSlip,
       invitation.checkTransport,
+      invitation.needOneMorePlace,
       invitation.transportFrom
     ),
     createdBy

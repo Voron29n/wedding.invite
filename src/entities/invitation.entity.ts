@@ -15,6 +15,9 @@ export class InvitationEntity extends BaseEntity {
   @Property({ default: false })
   checkTransport: boolean;
 
+  @Property({ default: false })
+  needOneMorePlace: boolean;
+
   @Enum(() => TransferFrom)
   transportFrom: TransferFrom;
 
@@ -24,10 +27,12 @@ export class InvitationEntity extends BaseEntity {
   constructor(
     checkSlip: boolean,
     checkTransport: boolean,
+    needOneMorePlace: boolean,
     transportFrom: TransferFrom
   ) {
     super();
     this.checkSlip = checkSlip;
+    this.needOneMorePlace = needOneMorePlace;
     this.checkTransport = checkTransport;
     this.transportFrom = transportFrom;
   }

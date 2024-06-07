@@ -10,6 +10,7 @@ const createInviteGroupBodySchema = Joi.object({
   invitation: Joi.object({
     checkSlip: Joi.boolean().required(),
     checkTransport: Joi.boolean().required(),
+    needOneMorePlace: Joi.boolean().required(),
     transportFrom: Joi.valid(...Object.values(TransferFrom)).required()
   }).required()
 });
@@ -21,6 +22,7 @@ const editInviteGroupBodySchema = Joi.object({
   invitation: Joi.object({
     checkSlip: Joi.boolean().required(),
     checkTransport: Joi.boolean().required(),
+    needOneMorePlace: Joi.boolean().required(),
     transportFrom: Joi.valid(...Object.values(TransferFrom)).required()
   }).optional()
 });
